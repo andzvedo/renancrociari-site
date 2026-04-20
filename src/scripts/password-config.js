@@ -1,3 +1,5 @@
+import { resolveSiteRoute } from '../portfolio-os-integration/config/routing-manifest.mjs';
+
 /**
  * Password Configuration
  * 
@@ -18,10 +20,16 @@
 
 // Password hashes (SHA-256)
 // Default password for demo: "demo123"
+const journalFinderRoute = resolveSiteRoute({
+    collection: 'work',
+    documentSlug: 'journal-finder',
+});
+
 export const PASSWORD_CONFIG = {
-    'case-journal-finder': {
-        hash: 'e4e2ff1a6fc2a6ce836b66c424aa2bdd4803d5b92d9750b0db4df4b1d1a8a597',
-        redirectUrl: '/connecting-every-discovery-with-a-worthy-home'
+    [journalFinderRoute.authId]: {
+        hash: 'd3ad9315b7be5dd53b31a273b3b3aba5defe700808305aa16a3062b76658a791',
+        // Caminho com ficheiro .html: servidores estáticos não resolvem `publicPath` sem extensão.
+        redirectUrl: `/${String(journalFinderRoute.outputFile || '').replace(/^\//, '')}`,
     }
 };
 
